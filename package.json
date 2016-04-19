@@ -1,0 +1,8 @@
+{
+  "name": "socket-encrypted-chat",
+  "version": "0.0.1",
+  "description": "Encrypted socket.io app",
+  "dependencies": {
+    "express": "^4.10.2"
+  }
+}
