@@ -1,0 +1,26 @@
+<!-- ahash the password in realtime, compare with password and login if matches -->
+<!-- character is one behind -->
+<!-- -->
+<!-- -->
+<!-- -->
+<form name="loginForm">
+  Username:<br>
+  <input type="text" id="usernameTextbox" value="landon"><br>
+  Password:<br>
+  <input type="text" id="pwTextbox" onkeypress="hasher()"><br><br>
+   Hash:<br>
+  <input type="text" id="hashTextbox"><br><br>
+  <input type="submit" onclick= "validate()">
+</form>
+
+
+<script type = "text/javascript">
+
+function hasher() {
+	var hashTextbox = document.getElementById("hashTextbox");
+	var password = document.getElementById("pwTextbox");
+	hashTextbox.value = password.value;
+}
+
+
+</script>
