@@ -63,29 +63,35 @@
   <script src="http://localhost/ss_qa/cryptojs/components/mode-cfb-min.js"></script>
 
   <script>
-    var passPhrase = "Secret Phassphrase";     
-    var socket = io();
-      $('form').submit(function(){
-	
-		var msg = $('#m').val();
-  
-    var encrypted = CryptoJS.AES.encrypt(msg, passPhrase, { mode: CryptoJS.mode.CFB });
-    encrypted = encrypted.toString();
-       console.log('encrypted', encrypted );    
-    socket.emit('chat message', encrypted);
-        $('#m').val('');
-        return false;
+    var passPhrase = "Secret Phassphrase";
+  var socket = io();
+  $('form').submit(function() {
+      var msg = $('#m').val();
+
+      //ecnrypts message
+      var encrypted = CryptoJS.AES.encrypt(msg, passPhrase, {
+          mode: CryptoJS.mode.CFB
       });
-	  
-    //decrypt on emit
-    socket.on('chat message', function(msg){	  
-      console.log('msg', msg);
-    var bytes = CryptoJS.AES.decrypt(msg, passPhrase, { mode: CryptoJS.mode.CFB });
+      
+      encrypted = encrypted.toString();
+      console.log('encrypted', encrypted);
+      socket.emit('chat message', encrypted);
+      $('#m').val('');
+      return false;
+  });
+
+  //decrypt on emit
+  socket.on('chat message', function(msg) {
+      console.log('msg', msg); //log encrypted message
+      
+      //decrypts message
+      var bytes = CryptoJS.AES.decrypt(msg, passPhrase, {
+          mode: CryptoJS.mode.CFB
+      });
       console.log('bytes', bytes);
-    var decrypted = bytes.toString(CryptoJS.enc.Utf8);  
-      console.log('decrypted', decrypted);  
-        $('#messages').append($('<li>').text(decrypted));
-      });
+      var decrypted = bytes.toString(CryptoJS.enc.Utf8);
+      $('#messages').append($('<li>').text(decrypted));
+  });
   </script>
 </body>
 
