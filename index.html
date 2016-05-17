@@ -46,7 +46,19 @@
       padding: 5px 10px;
     }
     
-    #messages li:nth-child(odd) {
+    #infoList li:nth-child(odd) {
+      background: #eee;
+       #messages {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+    }
+    
+    #infoList li {
+      padding: 5px 10px;
+    }
+    
+    #infoList li:nth-child(odd) {
       background: #eee;
     }
   </style>
@@ -54,6 +66,8 @@
 
 <body>
   <ul id="messages"></ul>
+  <ul id="infoList"></ul>
+  <label id="infoLabel"></label>
   <form action="">
     <input id="m" autocomplete="off" /><button>Send</button>
   </form>
@@ -63,8 +77,10 @@
   <script src="http://localhost/ss_qa/cryptojs/components/mode-cfb-min.js"></script>
 
   <script>
-    var passPhrase = "Secret Phassphrase";
+  var passPhrase = "Secret Phassphrase";
   var socket = io();
+  var isUserTyping = false;
+  
   $('form').submit(function() {
       var msg = $('#m').val();
 
@@ -92,7 +108,26 @@
       var decrypted = bytes.toString(CryptoJS.enc.Utf8);
       $('#messages').append($('<li>').text(decrypted));
   });
+  
+
+//set variable on keypress
+    $("#m").keypress(function(){
+      var isUserTyping = true;
+      console.log("User is typing");
+      $('#infoLabel').text("User is typing");      
+}); 
+
+//set variable when textbox loses focus
+    $("#m").focusout(function(){
+      var isUserTyping = false;
+      console.log("User is NOT typing");
+      $('#infoLabel').text("User is NOT typing");      
+}); 
+
+//Todo: 
+
+//Find Socket.IO way to send other info on the backend
   </script>
 </body>
-
 </html>
+
