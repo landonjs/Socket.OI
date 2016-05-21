@@ -15,7 +15,7 @@
     }
     
     form {
-      background: #000;
+      background: #808080;
       padding: 3px;
       position: fixed;
       bottom: 0;
@@ -46,19 +46,7 @@
       padding: 5px 10px;
     }
     
-    #infoList li:nth-child(odd) {
-      background: #eee;
-       #messages {
-      list-style-type: none;
-      margin: 0;
-      padding: 0;
-    }
-    
-    #infoList li {
-      padding: 5px 10px;
-    }
-    
-    #infoList li:nth-child(odd) {
+    #messages li:nth-child(odd) {
       background: #eee;
     }
   </style>
@@ -66,18 +54,20 @@
 
 <body>
   <ul id="messages"></ul>
-  <ul id="infoList"></ul>
-  <label id="infoLabel"></label>
+
   <form action="">
+    <label id="infoLabel"></label></br>
     <input id="m" autocomplete="off" /><button>Send</button>
   </form>
+
+
   <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
   <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
   <script src="http://localhost/ss_qa/cryptojs/rollups/aes.js"></script>
   <script src="http://localhost/ss_qa/cryptojs/components/mode-cfb-min.js"></script>
 
   <script>
-  var passPhrase = "Secret Phassphrase";
+    var passPhrase = "Secret Phassphrase";
   var socket = io();
   var isUserTyping = false;
   
@@ -129,5 +119,5 @@
 //Find Socket.IO way to send other info on the backend
   </script>
 </body>
-</html>
 
+</html>
